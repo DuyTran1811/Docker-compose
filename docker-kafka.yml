@@ -11,8 +11,6 @@ services:
     image: confluentinc/cp-kafka:7.0.1
     container_name: broker
     ports:
-    # To learn about configuring Kafka for access across networks see
-    # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
       - "9092:9092"
     depends_on:
       - zookeeper
@@ -24,24 +22,4 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-  db:
-      image: mysql
-      container_name: mysql
-      command: --default-authentication-plugin=mysql_native_password
-      restart: always
-      volumes:
-        - /Users/duytc/Documents/Docker/Docker-data/Mysql-data:/var/lib/mysql
-      environment:
-        MYSQL_ROOT_PASSWORD: duytc
-      ports:
-        - 3306:3306
-    
-  redis:
-    image: redis:6.2-alpine
-    container_name: redis
-    ports:
-      - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
-    volumes: 
-      - /Users/duytc/Documents/Docker/Docker-data/redis:/data
 
